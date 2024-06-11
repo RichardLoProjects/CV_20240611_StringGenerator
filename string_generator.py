@@ -15,15 +15,15 @@ def generate_password(
     numbers:str = '0123456789' if incl_numbers else ''
     symbols:str = '`!"$%^&*()-_=+[]{}#~;:\'@,.<>/?\\|' if incl_symbols else ''
     ## Symbols not included: £ and ¬
-    r:Random = Random()
-    password:list = [r.choice(lower)]
-    password += r.choice(upper) if incl_mixedcase else ''
-    password += r.choice(numbers) if incl_numbers else ''
-    password += r.choice(symbols) if incl_symbols else ''
+    rand:Random = Random()
+    password:list = [rand.choice(lower)]
+    password += rand.choice(upper) if incl_mixedcase else ''
+    password += rand.choice(numbers) if incl_numbers else ''
+    password += rand.choice(symbols) if incl_symbols else ''
     if length > min_length:
         all_characters:str = lower + upper + numbers + symbols
-        password += r.choices(all_characters, k=length-min_length)
-    r.shuffle(password)
+        password += rand.choices(all_characters, k=length-min_length)
+    rand.shuffle(password)
     return ''.join(password)
 
 
