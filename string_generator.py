@@ -28,7 +28,7 @@ def generate_password(
 
 
 
-def test() -> None:
+def test(print_message:bool) -> None:
     password_length = 20
     for i in range(8):
         binary = bin(i)[2:]
@@ -41,19 +41,39 @@ def test() -> None:
         output_message += 'mixedcase, ' if incl_c else ''
         output_message += 'numbers, ' if incl_n else ''
         output_message += 'symbols, ' if incl_s else ''
-        print(output_message[:-2]+'.')
+        if print_message:
+            print(output_message[:-2]+'.')
+    if print_message:
+        print('Test ran without crashing Python!')
     '''
     Notes when debugging:
     Learned £ and ¬ are not ascii characters
+    Learned True + True = 2
     Learned list + string is valid: [] + 'abc' --> ['a','b','c']
     Random.choice(seq) is invalid: must instantiate an instance of the object first
     random_inst.choice('') is invalid: cannot randomise choice on empty seq
     '''
 
-def main() -> int:
-    test()
-    print('Test ran without crashing Python!')
-    return 0
+def main() -> None:
+    test(False)
+    length:int = 20
+    mixedcase:int = 1
+    numbers:int = 1
+    symbols:int = 1
+    print('Program will continue generating passwords until a non-integer is entered.\n')
+    while True:
+        length = input('Enter length: ')
+        mixedcase = input('Include uppercase? (0/1): ')
+        numbers = input('Include numbers? (0/1): ')
+        symbols = input('Include symbols? (0/1): ')
+        try:
+            length = int(length)
+            mixedcase = int(mixedcase)
+            numbers = int(numbers)
+            symbols = int(symbols)
+            print(generate_password(length, mixedcase, numbers, symbols),'\n')
+        except:
+            break
 
 if __name__ == '__main__':
     main()
