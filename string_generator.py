@@ -36,17 +36,27 @@ def user_interaction() -> None:
     print('Program will continue generating passwords until a non-integer is entered.\n')
     while True:
         length = input('Enter length: ')
-        mixedcase = input('Include uppercase? (0/1): ')
-        numbers = input('Include numbers? (0/1): ')
-        symbols = input('Include symbols? (0/1): ')
         try:
             length = int(length)
-            mixedcase = int(mixedcase)
-            numbers = int(numbers)
-            symbols = int(symbols)
-            print(generate_password(length, mixedcase, numbers, symbols),'\n')
         except:
             break
+        mixedcase = input('Include uppercase? (0/1): ')
+        try:
+            mixedcase = int(mixedcase)
+        except:
+            break
+        numbers = input('Include numbers? (0/1): ')
+        try:
+            numbers = int(numbers)
+        except:
+            break
+        symbols = input('Include symbols? (0/1): ')
+        try:
+            symbols = int(symbols)
+        except:
+            break
+        if all([type(_obj)==int for _obj in {length, mixedcase, numbers, symbols}]):
+            print(generate_password(length, mixedcase, numbers, symbols),'\n')
 
 def test(print_message:bool) -> None:
     password_length = 20
