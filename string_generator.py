@@ -28,6 +28,26 @@ def generate_password(
 
 
 
+def user_interaction() -> None:
+    length:int = 20
+    mixedcase:int = 1
+    numbers:int = 1
+    symbols:int = 1
+    print('Program will continue generating passwords until a non-integer is entered.\n')
+    while True:
+        length = input('Enter length: ')
+        mixedcase = input('Include uppercase? (0/1): ')
+        numbers = input('Include numbers? (0/1): ')
+        symbols = input('Include symbols? (0/1): ')
+        try:
+            length = int(length)
+            mixedcase = int(mixedcase)
+            numbers = int(numbers)
+            symbols = int(symbols)
+            print(generate_password(length, mixedcase, numbers, symbols),'\n')
+        except:
+            break
+
 def test(print_message:bool) -> None:
     password_length = 20
     for i in range(8):
@@ -56,24 +76,7 @@ def test(print_message:bool) -> None:
 
 def main() -> None:
     test(False)
-    length:int = 20
-    mixedcase:int = 1
-    numbers:int = 1
-    symbols:int = 1
-    print('Program will continue generating passwords until a non-integer is entered.\n')
-    while True:
-        length = input('Enter length: ')
-        mixedcase = input('Include uppercase? (0/1): ')
-        numbers = input('Include numbers? (0/1): ')
-        symbols = input('Include symbols? (0/1): ')
-        try:
-            length = int(length)
-            mixedcase = int(mixedcase)
-            numbers = int(numbers)
-            symbols = int(symbols)
-            print(generate_password(length, mixedcase, numbers, symbols),'\n')
-        except:
-            break
+    user_interaction()
 
 if __name__ == '__main__':
     main()
